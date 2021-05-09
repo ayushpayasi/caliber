@@ -1,0 +1,264 @@
+<html>
+    <head>
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+
+</head>
+<body>
+    <style>
+        .width{
+    width:100%;
+    height: 45vh;
+    background:red;
+}
+.center{
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    height:47vh;
+}
+.navbar-custom{
+    box-shadow: 0px 0px 2px 0px red;
+    margin:1.4rem 0;
+    height:85vh;
+}
+.none{
+    display:none;
+}
+*, *:before, *:after {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: sans-serif;
+  padding: 60px 20px;
+}
+@media (min-width: 600px) {
+  body {
+    padding: 60px;
+  }
+}
+
+.range-slider {
+  margin: 60px 0 0 0%;
+}
+
+.range-slider {
+  width: 100%;
+}
+
+.range-slider__range {
+  -webkit-appearance: none;
+  width: calc(100% - (73px));
+  height: 10px;
+  border-radius: 5px;
+  background: #d7dcdf;
+  outline: none;
+  padding: 0;
+  margin: 0;
+}
+.range-slider__range::-webkit-slider-thumb {
+  -webkit-appearance: none;
+          appearance: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #2c3e50;
+  cursor: pointer;
+  -webkit-transition: background 0.15s ease-in-out;
+  transition: background 0.15s ease-in-out;
+}
+.range-slider__range::-webkit-slider-thumb:hover {
+  background: #1abc9c;
+}
+.range-slider__range:active::-webkit-slider-thumb {
+  background: #1abc9c;
+}
+.range-slider__range::-moz-range-thumb {
+  width: 20px;
+  height: 20px;
+  border: 0;
+  border-radius: 50%;
+  background: #2c3e50;
+  cursor: pointer;
+  -moz-transition: background 0.15s ease-in-out;
+  transition: background 0.15s ease-in-out;
+}
+.range-slider__range::-moz-range-thumb:hover {
+  background: #1abc9c;
+}
+.range-slider__range:active::-moz-range-thumb {
+  background: #1abc9c;
+}
+.range-slider__range:focus::-webkit-slider-thumb {
+  box-shadow: 0 0 0 3px #fff, 0 0 0 6px #1abc9c;
+}
+
+.range-slider__value {
+  display: inline-block;
+  position: relative;
+  width: 60px;
+  color: #fff;
+  line-height: 20px;
+  text-align: center;
+  border-radius: 3px;
+  background: #2c3e50;
+  padding: 5px 10px;
+  margin-left: 8px;
+}
+.range-slider__value:after {
+  position: absolute;
+  top: 8px;
+  left: -7px;
+  width: 0;
+  height: 0;
+  border-top: 7px solid transparent;
+  border-right: 7px solid #2c3e50;
+  border-bottom: 7px solid transparent;
+  content: "";
+}
+.none{
+  display: none;
+}
+
+::-moz-range-track {
+  background: #d7dcdf;
+  border: 0;
+}
+
+input::-moz-focus-inner,
+input::-moz-focus-outer {
+  border: 0;
+}
+    </style>
+    <div classname="mt-4 mb-4 ml-3 mr-3" class="container-fluid">
+        <div class="row">
+           <div class="col-3">
+              <div class="navbar-custom container">
+                 <div class="row">
+                    <div class="mt-5 mb-5 col">
+                       <h4>DASHBOARD</h4>
+                    </div>
+                 </div>
+                 <div class="row">
+                  <div class="col">
+                    <h6>Select Number of screens.</h6>
+                  </div>
+                 </div>
+                 <div class="row">
+                    <div class="col ">
+                        <div class="range-slider">
+                            <input class="range-slider__range" type="range" value="4" min="0" max="4">
+                            <span class="range-slider__value">4</span>
+                          </div>
+                          
+                    </div>
+                 </div>
+              </div>
+           </div>
+           <div id="load" class="col-9">
+              <div class="row">
+                 <div id="can1" class="center col">
+                    <canvas class="width" id="canvas1"></canvas>
+                 </div>
+                 <div id="can2" class="center col">
+                    <canvas class="width" id="canvas2"></canvas>
+                 </div>
+              </div>
+              <div class="row">
+                 <div id="can3" class="center col">
+                    <canvas class="width" id="canvas3"></canvas>
+                 </div>
+                 <div id="can4" class="center col">
+                    <canvas class="width" id="canvas4"></canvas>
+                 </div>
+              </div>
+           </div>
+        </div>
+     </div>
+     
+
+    <canvas id="canvas1"></canvas>
+</body>
+
+<script type="text/javascript" src="http://localhost:5000/jsmpeg.min.js"></script>
+<script type="text/javascript">
+
+  const handleToggle =(val)=>{
+    const canvas1 = document.getElementById("can1")
+    const canvas2 = document.getElementById("can2")
+    const canvas3 = document.getElementById("can3")
+    const canvas4 = document.getElementById("can4")
+    canvas1.classList.add("none")
+    canvas2.classList.add("none")
+    canvas3.classList.add("none")
+    canvas4.classList.add("none")
+    
+    switch (val){
+      
+      case "1": 
+        console.log(1)
+        canvas1.classList.remove("none")
+        break
+      case "2":
+        console.log(2)
+        canvas1.classList.remove("none")
+        canvas2.classList.remove("none")
+        break
+
+      case "3":
+        console.log(3)
+        canvas1.classList.remove("none")
+        canvas2.classList.remove("none")
+        canvas3.classList.remove("none")
+        break
+      
+      case "4":
+        console.log(4)
+        canvas1.classList.remove("none")
+        canvas2.classList.remove("none")
+        canvas3.classList.remove("none")
+        canvas4.classList.remove("none")
+        break
+      
+    }
+  }
+
+
+
+    var canvas = document.getElementById('canvas1');
+    var canvas2 = document.getElementById('canvas2');
+    var canvas3 = document.getElementById('canvas3');
+    var canvas4 = document.getElementById('canvas4');
+    var url = 'ws://localhost:9999/';
+    var url1 = 'ws://localhost:9998/';
+    var url2 = 'ws://localhost:9997/';
+    var url3 = 'ws://localhost:9996/';
+    var player = new JSMpeg.Player(url, {canvas:canvas, autoplay:true,audio:false,loop:true})
+    var player2 = new JSMpeg.Player(url1, {canvas:canvas2, autoplay:true,audio:false,loop:true})
+    var player3 = new JSMpeg.Player(url2, {canvas:canvas3, autoplay:true,audio:false,loop:true})
+    var player4 = new JSMpeg.Player(url3, {canvas:canvas4, autoplay:true,audio:false,loop:true})
+
+    var rangeSlider = function(){
+  var slider = $('.range-slider'),
+      range = $('.range-slider__range'),
+      value = $('.range-slider__value');
+  slider.each(function(){
+
+    value.each(function(){
+      var value = $(this).prev().attr('value');
+      $(this).html(value);
+    });
+
+    range.on('input', function(){
+      $(this).next(value).html(this.value);
+      handleToggle(this.value)
+    });
+  });
+};
+
+rangeSlider();
+</script> 
+</html>
+
